@@ -51,19 +51,9 @@
     .toc strong { display: block; margin-bottom: 8px; }
     .toc a { color: var(--link); text-decoration: none; }
     .toc a:hover { text-decoration: underline; }
-    section {
-      margin-top: 28px;
-      padding-top: 6px;
-    }
-    h2 {
-      margin: 0 0 10px;
-      font-size: 20px;
-      letter-spacing: -0.01em;
-    }
-    h3 {
-      margin: 18px 0 8px;
-      font-size: 16px;
-    }
+    section { margin-top: 28px; padding-top: 6px; }
+    h2 { margin: 0 0 10px; font-size: 20px; letter-spacing: -0.01em; }
+    h3 { margin: 18px 0 8px; font-size: 16px; }
     p { margin: 0 0 12px; }
     ul { margin: 0 0 12px; padding-left: 18px; }
     li { margin: 6px 0; }
@@ -92,6 +82,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <div style="max-width:920px;margin:0 auto;">
@@ -122,15 +113,19 @@
       <ul>
         <li>Sidra is designed to work primarily <strong>offline</strong>.</li>
         <li>Most of your data (tasks, reflections, XP, streaks, settings) is stored <strong>locally on your device</strong>.</li>
-        <li>Sidra may use third-party services to show web content you open (e.g., Contact form, Donate page) and to collect crash diagnostics (if enabled).</li>
+        <li>If you use optional online features (Contact Us, Support, remote configuration, analytics, diagnostics), data may be processed by those providers.</li>
+        <li><strong>We do not sell your personal data.</strong></li>
       </ul>
+      <p class="note">
+        Sidra is a habit app, not a medical app. Please avoid entering highly sensitive personal information into reflections.
+      </p>
     </section>
 
     <section id="info-we-collect">
       <h2>2) Information we collect</h2>
 
       <h3>A) Data you enter in the app (stored locally)</h3>
-      <p>Sidra may store the following on your device:</p>
+      <p>Sidra stores the following on your device:</p>
       <ul>
         <li>Task completion history (daily tasks, repeats)</li>
         <li>Reflections/journal entries you type</li>
@@ -139,34 +134,54 @@
         <li>App preferences and internal flags</li>
       </ul>
       <p class="note">
-        This data is stored locally using device storage (e.g., AsyncStorage/MMKV depending on your build).
+        This data stays on your device unless you choose to submit something via an online feature (e.g., Contact Us).
       </p>
 
-      <h3>B) Device and app diagnostics (optional)</h3>
+      <h3>B) Analytics (optional, privacy-focused)</h3>
+      <p>
+        Sidra may use <strong>PostHog</strong> to understand how the app is used (for example, which screens/features are used most).
+        This helps us improve the app.
+      </p>
+      <p>What we send to analytics (examples):</p>
+      <ul>
+        <li>App events like screen views and button taps (e.g., “opened journal”, “completed task”)</li>
+        <li>Non-identifying device/app info: app version, OS version, device type, timezone</li>
+        <li>Counts and settings such as selected track and number of focus areas</li>
+      </ul>
+      <p>What we <strong>do not</strong> send to analytics:</p>
+      <ul>
+        <li>Your reflection text or journal content</li>
+        <li>Names, emails, phone numbers, or contacts</li>
+        <li>Custom task text you type (we avoid sending user-entered text)</li>
+      </ul>
+      <p class="note">
+        We configure analytics to avoid IP-based geolocation where possible (PostHog’s <code>disableGeoip</code> option). Even so, any network request may be processed through standard server logs by providers as part of normal operation.  [oai_citation:1‡PostHog](https://posthog.com/docs/libraries/react-native?utm_source=chatgpt.com)
+      </p>
+
+      <h3>C) Device and app diagnostics (optional)</h3>
       <p>If crash/error reporting is enabled in your build, Sidra may collect diagnostic information such as:</p>
       <ul>
         <li>App version/build and device OS version</li>
         <li>Crash logs and error traces</li>
-        <li>Anonymized identifiers used for debugging stability issues</li>
+        <li>Basic device identifiers used for debugging stability issues</li>
       </ul>
       <p>Sidra uses <strong>Sentry</strong> for crash/error monitoring when configured.</p>
 
-      <h3>C) Data submitted through Contact Us (Google Forms)</h3>
+      <h3>D) Data submitted through Contact Us (Google Forms)</h3>
       <p>
         If you use the in-app “Contact Us” form, your submission is handled by Google Forms.
-        Information you enter (and any prefilled diagnostics like app version/timezone) is sent to the form owner (us).
-        Google’s own privacy practices apply when using Google Forms.
+        Any information you type into the form is sent to the form owner (us). Google’s own privacy practices apply.
       </p>
 
-      <h3>D) Donation/support links (Buy Me a Coffee)</h3>
+      <h3>E) Support / tips (In-App Purchase)</h3>
       <p>
-        If you tap “Support Sidra,” Sidra may open a web page inside the app (WebView) or in your browser.
-        Any information you provide on those pages is handled by the relevant website (e.g., Buy Me a Coffee) under their privacy policy.
+        On iOS, “Support Sidra” uses Apple’s In-App Purchase system for optional tips/subscriptions.
+        Payment information is handled by Apple. Sidra does not collect or store your payment card details.
       </p>
 
-      <h3>E) Remote configuration</h3>
+      <h3>F) Remote configuration</h3>
       <p>
-        Sidra may fetch a small remote configuration file (for example, to update support links, donate link, banners, or content patches).
+        Sidra may fetch a small remote configuration file (for example, to update support links, banners, or content patches).
         This request may reveal your IP address to the hosting provider (standard for any internet request).
         Sidra caches the configuration locally to reduce network usage.
       </p>
@@ -179,7 +194,8 @@
         <li>Run core features (tasks, XP, streaks, rewards)</li>
         <li>Show reminders/notifications you enable</li>
         <li>Improve stability and performance (diagnostics/crash reports)</li>
-        <li>Respond to your support requests</li>
+        <li>Understand feature usage and improve the app (optional analytics)</li>
+        <li>Respond to support requests you submit</li>
       </ul>
       <p><strong>We do not sell your personal data.</strong></p>
     </section>
@@ -188,8 +204,10 @@
       <h2>4) Sharing of information</h2>
       <p>Sidra may share information only in these cases:</p>
       <ul>
-        <li>With service providers you directly use via the app (e.g., Google Forms for Contact Us, Sentry for crash diagnostics, web pages for donations)</li>
-        <li>If required by law</li>
+        <li><strong>Service providers you choose to use:</strong> Google Forms (Contact Us), Apple In-App Purchase (Support), and optional analytics/diagnostics providers.</li>
+        <li><strong>Diagnostics providers (optional):</strong> Sentry for crash reports (if enabled).</li>
+        <li><strong>Analytics providers (optional):</strong> PostHog for product analytics (if enabled).</li>
+        <li><strong>If required by law.</strong></li>
       </ul>
     </section>
 
@@ -197,7 +215,8 @@
       <h2>5) Data retention</h2>
       <ul>
         <li>Local app data stays on your device until you delete it (by uninstalling the app or clearing storage).</li>
-        <li>Support form submissions and crash diagnostics are retained by the relevant provider (Google/Sentry) according to their retention policies and our account settings.</li>
+        <li>Support form submissions are retained by Google Forms according to Google’s policies and your form settings.</li>
+        <li>Crash diagnostics and analytics (if enabled) are retained by the relevant provider according to their retention settings.</li>
       </ul>
     </section>
 
@@ -206,7 +225,7 @@
       <p>You can:</p>
       <ul>
         <li>Disable notifications at the OS level or in Sidra settings.</li>
-        <li>Choose whether to submit support requests via the form.</li>
+        <li>Choose whether to submit support requests via the Contact Us form.</li>
         <li>Uninstall the app to remove locally stored data.</li>
       </ul>
       <p>
